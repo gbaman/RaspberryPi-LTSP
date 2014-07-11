@@ -1,0 +1,140 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Raspi-LTSP</title>
+  <meta name="description" content="Use Raspberry Pis effectivly in a permanent classroom environment">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Raspi-LTSP</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Use Raspberry Pis effectivly in a permanent classroom environment</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/gbaman/RaspberryPi-LTSP/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/gbaman/RaspberryPi-LTSP/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/gbaman/RaspberryPi-LTSP" class="code">View Raspi-LTSP on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <p><img src="https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/images/Raspi-Login.png" alt="Raspi-login"></p>
+
+<h3>
+<a name="what-is-raspi-ltsp" class="anchor" href="#what-is-raspi-ltsp"><span class="octicon octicon-link"></span></a>What is Raspi-LTSP?</h3>
+
+<p>Raspi-LTSP is a utility for setting up infrastructure required for a classroom set of Raspberry Pis.<br>
+Its main features include</p>
+
+<ul>
+<li>
+<strong>Network based user accounts</strong> - A student can log onto any Raspberry Pi in the classroom and have access to their files. Their files are stored centrally on the server</li>
+<li>
+<strong>Centralised master operating system</strong> - All the Raspberry Pis boot a single master operating system from the server every boot. </li>
+</ul><p>Raspi-LTSP requires a wired Ethernet connection between the server machine and every Raspberry Pi. Infrastructure for this is usually already included in ICT classrooms but if not, a simple network is relatively cheap and simple to set up.<br>
+On top of this, an old desktop or laptop is required to run the server. It does not need to be powerful as will be running Ubuntu Linux, a very lightweight operating system.  </p>
+
+<p><strong>Wifi is not supported</strong> due to it being unreliable and slow</p>
+
+<h3>
+<a name="advantages-compared-to-a-usual-raspberry-pi-classroom-setup" class="anchor" href="#advantages-compared-to-a-usual-raspberry-pi-classroom-setup"><span class="octicon octicon-link"></span></a>Advantages compared to a usual Raspberry Pi classroom setup</h3>
+
+<ul>
+<li>No more flashing 100s of SD cards, just drop on 30mb (compared to 3gb for Raspbian).</li>
+<li>Students can log into any Raspberry Pi in the classroom.</li>
+<li>Backup utility included to automatically backup all students work regularly.</li>
+<li>No more assigning pupils to a single SD card.</li>
+<li>No more needing to purchase 100s of SD cards for a single school, just need enough for 1 class set.</li>
+<li>System is incredibly simple to setup with full userguide, one trial school even got a year 7 student to set it up on his own, he had no issues.</li>
+<li>Due to all the Raspberry Pis booting off the server, if you want to add a new piece of software to every Raspberry Pi in the classroom, update master image and reboot all Raspberry Pis, that is it...</li>
+</ul><h3>
+<a name="ok-i-am-interested-how-do-i-get-started" class="anchor" href="#ok-i-am-interested-how-do-i-get-started"><span class="octicon octicon-link"></span></a>Ok, I am interested... How do I get started?</h3>
+
+<p>First you need to grab the required equipment.</p>
+
+<ul>
+<li>An old desktop/laptop computer for the server (preferably made within the last 6 years).</li>
+<li>A network switch (requires at least a single gigabit or 1000/100/10mbit port for the server).</li>
+<li>A router (for a standalone network) or connection to your schools network.</li>
+<li>Some Ethernet cables.</li>
+<li>A Raspberry Pi and SD card of at least 128mb.</li>
+</ul><h3>
+<a name="ubuntu-installation-recommended" class="anchor" href="#ubuntu-installation-recommended"><span class="octicon octicon-link"></span></a>Ubuntu installation (Recommended)</h3>
+
+<h4>
+<a name="for-a-full-draft-userguide-designed-for-complete-beginners-see-here-httpbitly1l26rti" class="anchor" href="#for-a-full-draft-userguide-designed-for-complete-beginners-see-here-httpbitly1l26rti"><span class="octicon octicon-link"></span></a>For a full draft userguide designed for complete beginners, see here <a href="http://bit.ly/1l26rti">http://bit.ly/1l26rti</a>
+</h4>
+
+<p>Raspi-LTSP is officially supported and tested on Ubuntu 14.04 LTS (Trusty Tahr). Other versions are very likely to work, but at not supported.</p>
+
+<ol>
+<li>Download and install Ubuntu 14.04 on an old computer. This is a great guide to follow <a href="http://www.ubuntu.com/download/desktop/install-ubuntu-desktop">http://www.ubuntu.com/download/desktop/install-ubuntu-desktop</a> .</li>
+<li>Open a terminal and grab Raspi-LTSP with <code>wget https://raw.github.com/gbaman/RaspberryPi-LTSP/master/Pi_ltsp</code>.</li>
+<li>Run Raspi-LTSP with <code>sudo bash Pi_ltsp</code>.</li>
+<li>Raspi-LTSP should now ask if you want to run a full install, select yes.</li>
+<li>Go make a few cups of tea, will take 1-2 hours.</li>
+<li>Select any additional packages you want for your install from the menu, you can rerun this menu later if you want.</li>
+<li>Verify your IP address is correct (important for machines with 2 NICs).</li>
+<li>Decide whether to enable sudo support, if you aren't going to use GPIO no need to enable it, can be changed later.</li>
+<li>Installation should now be complete on the server!</li>
+<li>Copy the contents of the piboot folder (found in <code>/home/YouUserName/piboot</code>) to a blank fat32 formatted SD card of at least 32mb.</li>
+<li>Plug in keyboard, mouse, ethernet and power to your Raspberry Pi with your newly created SD card in it. It should boot up, find your server and present a login screen. If it fails to load, check <em>Connection timed out errors on boot</em> section below.</li>
+<li>You may wish to add some new users. The user management tools can be found in <code>Manage-Users</code>
+</li>
+</ol><h3>
+<a name="frequently-asked-questions" class="anchor" href="#frequently-asked-questions"><span class="octicon octicon-link"></span></a>Frequently asked questions</h3>
+
+<ul>
+<li>
+<strong>How much does Raspi-LTSP software cost?</strong><br>
+Raspi-LTSP is completely free. The software is free and opensource. It is released under the GNU General Public Licence version 2 which you can view <a href="https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/LICENSE">https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/LICENSE</a>
+</li>
+<li>
+<strong>Can I run the server off a Raspberry Pi?</strong><br>
+Although there is nothing stopping it in theory, doing this is unsupported and not recommended. The Raspberry Pi only has a 100mbit Ethernet port, 10 times slower than the modern standard available on most computers in the past few years of 1000mbit (or gigabit) Ethernet. This means boots will be slow for more than 1 or 2 Raspberry Pis.</li>
+<li>
+<strong>Is it much slower than running standard Raspbian off a normal SD card?</strong><br>
+Other than bootup, for most application no. Bootup takes roughly 30 seconds longer on most networks. For more detailed benchmarks, check out the benchmark section - <a href="https://github.com/gbaman/RaspberryPi-LTSP#benchmarks">https://github.com/gbaman/RaspberryPi-LTSP#benchmarks</a>
+</li>
+</ul><p><img src="https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/images/Raspi-Desktop.png" alt="Raspi-Desktop"></p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/gbaman" class="avatar"><img src="https://avatars0.githubusercontent.com/u/833193?s=60" width="48" height="48"/></a> <a href="https://github.com/gbaman">gbaman</a> maintains <a href="https://github.com/gbaman/RaspberryPi-LTSP">Raspi-LTSP</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/gbaman/RaspberryPi-LTSP/tarball/master" class="tar">tar</a><a href="https://github.com/gbaman/RaspberryPi-LTSP/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
