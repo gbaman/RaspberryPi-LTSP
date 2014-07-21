@@ -114,7 +114,7 @@ Raspi-LTSP is completely free. The software is free and opensource. It is releas
 Although there is nothing stopping it in theory, doing this is unsupported and not recommended. The Raspberry Pi only has a 100mbit Ethernet port, 10 times slower than the modern standard available on most computers in the past few years of 1000mbit (or gigabit) Ethernet. This means boots will be slow for more than 1 or 2 Raspberry Pis.<br>
 </li>
 <li>
-<strong>Does it support wifi?</strong>
+<strong>Does it support wifi?</strong><br>
 No. Raspi-LTSP does not support wifi. Wifi is way too slow for this type of thing unless you use an expensive wifi high quality adapter. As most people buy cheap ones that aren't great (although claim to be!), boot speed would be drastically hit. Plus, keep in mind how wifi works. It has a shared bandwidth, for wireless N, the standard is roughly 150mbit/s. This 150mbit/s is shared between all devices on the network (unless using 2 networks via 2.4GHz and 5GHz, in this case you have 300mbit). A Raspberry Pi basically requires 50mbit/s to boot at a decent speed, so you could just about get 3 Raspberry Pis booting. But with wireless you have a number of other overheads and stuff like walls in the way and just general interference dropping the speed further.<br>
 To put this into perspective, standard gigabit Ethernet provides 1000mbit/s... 150mbit/s vs 1000mbit/s.<br>
 So although it is possible, the amount of work required to integrate common drivers etc into the initramfs and get it all tested massively outweighs the benefits, so no, Raspi-LTSP does not support wifi.<br>
