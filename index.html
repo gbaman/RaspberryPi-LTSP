@@ -36,116 +36,88 @@
         <span class="blc"></span><span class="trc"></span>
         </div>
         <article class="markdown-body">
-          <p><img src="https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/images/Raspi-Login.png" alt="Raspi-login"></p>
+          <h1>
+<a id="raspberrypi-ltsp" class="anchor" href="#raspberrypi-ltsp" aria-hidden="true"><span class="octicon octicon-link"></span></a>RaspberryPi-LTSP</h1>
+
+<p><img src="https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/images/Raspi-Login.png" alt="Login screen"></p>
+
+<h2>
+<a id="raspi-ltsp-documentation-site---httppi-ltspnet" class="anchor" href="#raspi-ltsp-documentation-site---httppi-ltspnet" aria-hidden="true"><span class="octicon octicon-link"></span></a>Raspi-LTSP Documentation Site - <a href="http://pi-ltsp.net">http://pi-ltsp.net</a>
+</h2>
+
+<hr>
 
 <h3>
-<a name="what-is-raspi-ltsp" class="anchor" href="#what-is-raspi-ltsp"><span class="octicon octicon-link"></span></a>What is Raspi-LTSP?</h3>
+<a id="raspi-ltsp-is-a-utility-for-setting-up-the-infrastructure-required-for-a-permanent-classroom-set-of-raspberry-pis" class="anchor" href="#raspi-ltsp-is-a-utility-for-setting-up-the-infrastructure-required-for-a-permanent-classroom-set-of-raspberry-pis" aria-hidden="true"><span class="octicon octicon-link"></span></a>"<em>Raspi-LTSP is a utility for setting up the infrastructure required for a permanent classroom set of Raspberry Pis."</em>
+</h3>
 
-<p>Raspi-LTSP is a utility for setting up infrastructure required for a classroom set of Raspberry Pis.<br>
+<p>RaspberryPi-LTSP is has been written to help support educators in using the Raspberry Pi computer in their classrooms<br>
 Its main features include</p>
 
 <ul>
 <li>
-<strong>Network based user accounts</strong> - A student can log onto any Raspberry Pi in the classroom and have access to their files. Their files are stored centrally on the server</li>
+<strong>Network based user accounts</strong> - A student can log onto any Raspberry Pi in the classroom and have access to their files. Their files are stored centrally on the server.</li>
 <li>
-<strong>Centralised master operating system</strong> - All the Raspberry Pis boot a single master operating system from the server every boot. </li>
+<strong>Centralised master operating system</strong> - All the Raspberry Pis boot a single master operating system from the server every boot. So no more need to flash Raspbian onto 30+ SD cards. Just copy 30mb onto the SD cards.</li>
 <li>
-<strong>Automated work submission and collection system</strong> - A teacher can easily collect work from students digitally for marking without the need for printing.</li>
+<strong>Automated work submission and collection system</strong> - A teacher can easily collect work from students digitally completely automatically for marking without the need for printing.</li>
+<li>
+<strong>Shared folders</strong> - Teachers can set up shared folders which are available to every Raspberry Pi in the classroom. These can be set up as read-only or read/write for students.<br>
+</li>
+<li>
+<strong>Easy installation of software</strong> - Software can be easily installed with from a menu of suggested packages including Libreoffice, ScratchGPIO5 and Python hardware libraries (like the Pibrella library).<br>
+</li>
+<li>
+<strong>Epoptes classroom management software integration</strong> - Epoptes classroom management software is integrated automatically allowing educators to blank students screens, reboot or shutdown all Raspberry Pis.</li>
+<li>
+<strong>Easy to configure backups</strong> - Educators can easily setup backups for the entire classes work to be saved on an external hard drive on a daily or weekly basis.<br>
+</li>
+<li>
+<strong>It is completely free and open-source</strong> - RaspberryPi-LTSP is completely free and open-source for everybody!<br>
+</li>
+<li>
+<strong>Extensive documentation</strong> - Alongside RaspberryPi-LTSP, there is also an extensive website of documentation with currently over 30 sections covering all features with over 100 images/screengrabs. This can be found at <a href="http://pi-ltsp.net">http://pi-ltsp.net</a>.<br>
+</li>
+<li>
+<strong>Fully supports the OCR GCSE CS A452 task*</strong> - RaspberryPi-LTSP full supports the OCR GCSE Computer Science A452 Linux task which requires students to be able to work with files, create users and groups and also install software. All of this is possible with RaspberryPi-LTSP.<br>
+</li>
 </ul>
 
-<p>Raspi-LTSP requires a wired Ethernet connection between the server machine and every Raspberry Pi. Infrastructure for this is usually already included in ICT classrooms but if not, a simple network is relatively cheap and simple to set up.<br>
-On top of this, an old desktop or laptop is required to run the server. It does not need to be powerful as will be running Ubuntu Linux, a very lightweight operating system.  </p>
+<p>RaspberryPi-LTSP is designed for teachers to setup their own mini Raspberry Pi networks. 
+The installation process is extremely simple and well supported by the documentation. 
+It is so simple, we even have an 11 year old who manages his entire schools RaspberryPi-LTSP network for the teachers of the school in his spare time.      </p>
 
-<p><strong>Wifi is not supported</strong> due to it being unreliable and slow</p>
+<p>Simplicity is the key to RaspberryPi-LTSP.   </p>
 
-<h3>
-<a name="advantages-compared-to-a-usual-raspberry-pi-classroom-setup" class="anchor" href="#advantages-compared-to-a-usual-raspberry-pi-classroom-setup"><span class="octicon octicon-link"></span></a>Advantages compared to a usual Raspberry Pi classroom setup</h3>
+<p>* The OCR GCSE CS A452 task is not supported on the original Raspberry Pi model B revision 1 with 256mb of RAM as it is unable to install <code>tree</code> due to a lack of RAM.</p>
 
-<ul>
-<li>No more flashing 100s of SD cards, just drop on 30mb (compared to 3gb for Raspbian).</li>
-<li>Students can log into any Raspberry Pi in the classroom.</li>
-<li>Backup utility included to automatically backup all students work regularly.</li>
-<li>No more assigning pupils to a single SD card.</li>
-<li>No more needing to purchase 100s of SD cards for a single school, just need enough for 1 class set.</li>
-<li>System is incredibly simple to setup with full userguide, one trial school even got a year 7 student to set it up on his own, he had no issues.</li>
-<li>Due to all the Raspberry Pis booting off the server, if you want to add a new piece of software to every Raspberry Pi in the classroom, update master image and reboot all Raspberry Pis, that is it...</li>
-</ul>
+<p><img src="https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/images/lapdock-ltsp.jpg" alt="Lapdocks"></p>
 
-<h3>
-<a name="ok-i-am-interested-how-do-i-get-started" class="anchor" href="#ok-i-am-interested-how-do-i-get-started"><span class="octicon octicon-link"></span></a>Ok, I am interested... How do I get started?</h3>
+<h2>
+<a id="feedback" class="anchor" href="#feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feedback</h2>
 
-<p>First you need to grab the required equipment.</p>
+<p>A number of schools across the world have been trialing the Alpha versions of RaspberryPi-LTSP for a number of months now.<br>
+The overall feedback has been excellent with overwhelmingly positive feedback from educators.   </p>
 
-<ul>
-<li>An old desktop/laptop computer for the server (preferably made within the last 6 years).</li>
-<li>A network switch (requires at least a single gigabit or 1000/100/10mbit port for the server).</li>
-<li>A router (for a standalone network) or connection to your schools network.</li>
-<li>Some Ethernet cables.</li>
-<li>A Raspberry Pi and SD card of at least 128mb.</li>
-</ul>
+<hr>
 
-<h3>
-<a name="project-documentation---httppi-ltspnet" class="anchor" href="#project-documentation---httppi-ltspnet"><span class="octicon octicon-link"></span></a>Project Documentation - <a href="http://pi-ltsp.net">http://pi-ltsp.net</a>
-</h3>
+<p><em>"I see no other way an educator can use Raspberry Pi effectively in a classroom on a day to day basis without RaspberryPi-LTSP"</em> - <strong>Ben Smith, ArnoldKEQMS school.</strong>   </p>
 
-<p><strong>The documentation below may be out of date</strong> and is no longer kept up to date. Please use the dedicated documentation site above.</p>
+<p><em>"After the initial setup of Raspi-LTSP, the server makes running a Pi club so much easier. The user accounts make it ideal for having multiple sessions with different students without the hassle of knowing who's work is on what Raspberry Pi"</em> - <strong>Ryan Walmsley, North Hertfordshire College
+Raspberry Pi Club.</strong></p>
 
-<h3>
-<a name="ubuntu-install" class="anchor" href="#ubuntu-install"><span class="octicon octicon-link"></span></a>Ubuntu Install</h3>
+<h2>
+<a id="warning" class="anchor" href="#warning" aria-hidden="true"><span class="octicon octicon-link"></span></a>WARNING</h2>
 
-<p>Raspi-LTSP is officially supported and tested on Ubuntu 14.04 LTS (Trusty Tahr). Other versions are very likely to work, but at not supported.</p>
-
-<ol>
-<li>Download and install Ubuntu 14.04 on an old computer. This is a great guide to follow <a href="http://www.ubuntu.com/download/desktop/install-ubuntu-desktop">http://www.ubuntu.com/download/desktop/install-ubuntu-desktop</a> .</li>
-<li>Open a terminal and grab Raspi-LTSP with <code>wget https://raw.github.com/gbaman/RaspberryPi-LTSP/master/Pi_ltsp</code>.</li>
-<li>Run Raspi-LTSP with <code>sudo bash Pi_ltsp</code>.</li>
-<li>Raspi-LTSP should now ask if you want to run a full install, select yes.</li>
-<li>Go make a few cups of tea, will take 1-2 hours.</li>
-<li>Select any additional packages you want for your install from the menu, you can rerun this menu later if you want.</li>
-<li>Verify your IP address is correct (important for machines with 2 NICs).</li>
-<li>Decide whether to enable sudo support, if you aren't going to use GPIO no need to enable it, can be changed later.</li>
-<li>Installation should now be complete on the server!</li>
-<li>Copy the contents of the piboot folder (found in <code>/home/YouUserName/piboot</code>) to a blank fat32 formatted SD card of at least 32mb.</li>
-<li>Plug in keyboard, mouse, ethernet and power to your Raspberry Pi with your newly created SD card in it. It should boot up, find your server and present a login screen. If it fails to load, check <em>Connection timed out errors on boot</em> section below.</li>
-<li>You may wish to add some new users. The user management tools can be found in <code>Manage-Users</code>
-</li>
-</ol>
-
-<h3>
-<a name="frequently-asked-questions" class="anchor" href="#frequently-asked-questions"><span class="octicon octicon-link"></span></a>Frequently asked questions</h3>
-
-<ul>
-<li>
-<strong>How much does Raspi-LTSP software cost?</strong><br>
-Raspi-LTSP is completely free. The software is free and opensource. It is released under the GNU General Public Licence version 2 which you can view <a href="https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/LICENSE">https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/LICENSE</a>
-</li>
-<li>
-<strong>Can I run the server off a Raspberry Pi?</strong><br>
-Although there is nothing stopping it in theory, doing this is unsupported and not recommended. The Raspberry Pi only has a 100mbit Ethernet port, 10 times slower than the modern standard available on most computers in the past few years of 1000mbit (or gigabit) Ethernet. This means boots will be slow for more than 1 or 2 Raspberry Pis.<br>
-</li>
-<li>
-<strong>Does it support wifi?</strong><br>
-No. Raspi-LTSP does not support wifi. Wifi is way too slow for this type of thing unless you use an expensive wifi high quality adapter. As most people buy cheap ones that aren't great (although claim to be!), boot speed would be drastically hit. Plus, keep in mind how wifi works. It has a shared bandwidth, for wireless N, the standard is roughly 150mbit/s. This 150mbit/s is shared between all devices on the network (unless using 2 networks via 2.4GHz and 5GHz, in this case you have 300mbit). A Raspberry Pi basically requires 50mbit/s to boot at a decent speed, so you could just about get 3 Raspberry Pis booting. But with wireless you have a number of other overheads and stuff like walls in the way and just general interference dropping the speed further.<br>
-To put this into perspective, standard gigabit Ethernet provides 1000mbit/s... 150mbit/s vs 1000mbit/s.<br>
-So although it is possible, the amount of work required to integrate common drivers etc into the initramfs and get it all tested massively outweighs the benefits, so no, Raspi-LTSP does not support wifi.<br>
-</li>
-<li>
-<strong>Is it much slower than running standard Raspbian off a normal SD card?</strong><br>
-Other than bootup, for most application no. Bootup takes roughly 30 seconds longer on most networks. For more detailed benchmarks, check out the benchmark section - <a href="https://github.com/gbaman/RaspberryPi-LTSP#benchmarks">https://github.com/gbaman/RaspberryPi-LTSP#benchmarks</a>
-</li>
-<li>
-<strong>Is the Raspberry Pi model B+ supported by Raspi-LTSP?</strong>
-Yes! As long as you are running at least version 0.7.2 and have updated the operating system and SD card image.<br>
-To do that, run "Update-all" to update all software on the virtual OS followed by "Change-IP" and update the files on your SD card with the new ones.</li>
-</ul>
-
-<p><img src="https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/images/Raspi-Desktop.png" alt="Raspi-Desktop"></p>
+<p>The software included should work but is not heavily tested with every new code change. Consider it Alpha quality software.<br>
+It is recommended, if you are interested in bringing this into your school, feel free to contact Andrew (lead developer) via the <a href="http://pi-ltsp.net/support.html">support page</a>.<br>
+For details on the licence of this project, see the LICENCE file.</p>
         </article>
       </div>
     </div>
     <footer>
       <div class="owner">
-      <p><a href="https://github.com/gbaman" class="avatar"><img src="https://avatars0.githubusercontent.com/u/833193?v=2&amp;s=60" width="48" height="48"></a> <a href="https://github.com/gbaman">gbaman</a> maintains <a href="https://github.com/gbaman/RaspberryPi-LTSP">Raspi-LTSP</a></p>
+      <p><a href="https://github.com/gbaman" class="avatar"><img src="https://avatars1.githubusercontent.com/u/833193?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/gbaman">gbaman</a> maintains <a href="https://github.com/gbaman/RaspberryPi-LTSP">Raspi-LTSP</a></p>
 
 
       </div>
