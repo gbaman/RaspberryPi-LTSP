@@ -3,7 +3,7 @@
 #
 # See LICENSE file for copyright and license details
 
-version=0.10.41
+version=0.10.42
 
 #Raspi-LTSP
 #Pi_LTSP
@@ -21,6 +21,15 @@ Timeout=1
 PythonFunctions="/usr/local/bin/Pi_ltsp-functions-python.py"
 PythonStart="python3"
 p="$PythonStart $PythonFunctions"
+RepositoryBase="https://github.com/gbaman/"
+RepositoryName="RaspberryPi-LTSP"
+RawRepositoryBase="https://raw.github.com/gbaman/"
+Repository="$RepositoryBase$RepositoryName"
+RawRepository="$RawRepositoryBase$RepositoryName"
+ReleaseBranch="master"
+ltspBase="/opt/ltsp/"
+cpuArch="armhf"
+
 
 #------------------------
 
@@ -56,7 +65,7 @@ LegacyFixes() {
 	if [ -f "/etc/default/epoptes" ]; then
 		ReplaceTextLine "/etc/default/epoptes" "SOCKET_GROUP=staff" "SOCKET_GROUP=teacher"
 	fi
-	ReplaceTextLine "/etc/sudoers.d/01staff" "%staff ALL=NOPASSWD: ALL" "%teacher ALL=NOPASSWD: ALL"
+	#ReplaceTextLine "/etc/sudoers.d/01staff" "%staff ALL=NOPASSWD: ALL" "%teacher ALL=NOPASSWD: ALL"
 	
 	if [ ! -f "/opt/ltsp/armhf/usr/local/bin/Raspi-ltsp-screenshot.sh" ]; then
 		AddScreenshot
@@ -193,6 +202,12 @@ if [ -e "/opt/ltsp/.backup" ]; then
 
 }
 
+gp(){
+	if [ -f /tmp/ltsptmp ]; then
+		echo $(head -n 1 /tmp/ltsptmp)
+	fi
+}
+
 installLTSP() {
 #Installs main packages required by LTSP
 apt-get update && apt-get upgrade -y
@@ -292,8 +307,9 @@ fi
 
 checkInternet(){
 
-echo $($p CheckInternet $Timeout)
-
+$p CheckInternet $Timeout
+thing=$(gp)
+echo $thing
 #WGET="/usr/bin/wget"
 
 #$WGET -q --tries=20 --timeout=10 http://www.google.com -O /tmp/google.idx &> /dev/null
@@ -322,7 +338,7 @@ if [ $Internet -eq 0 ]; then
 		mkdir /opt/raspiLTSP/PiBootBackup
 	fi
 	rm -rf /tmp/PiBoot
-	git clone --depth 1 https://github.com/gbaman/RaspberryPi-LTSP.git /tmp/PiBoot #Clones main repository, including boot files
+	git clone --depth 1 $Repository.git /tmp/PiBoot #Clones main repository, including boot files
 	rm -rf /opt/raspiLTSP/PiBootBackup/*
 	cp /tmp/PiBoot/boot/* /opt/raspiLTSP/PiBootBackup/
 	UpdateIP
@@ -578,7 +594,7 @@ RaspiTheme(){
 #Grabs a copy of the custom Raspberry Pi login screen and applies it
 
 rm -rf RaspberryPi-LTSP
-git clone --depth 1 https://github.com/gbaman/RaspberryPi-LTSP.git
+git clone --depth 1 $Repository.git
 cp -r RaspberryPi-LTSP/themes/raspi /opt/ltsp/armhf/usr/share/ldm/themes/raspi
 rm /opt/ltsp/armhf/etc/alternatives/ldm-theme
 ln -s /usr/share/ldm/themes/raspi /opt/ltsp/armhf/etc/alternatives/ldm-theme
@@ -652,7 +668,7 @@ ltsp-chroot --arch armhf apt-get install --no-install-recommends -y epiphany-bro
 ltsp-chroot apt-get install -y java-common oracle-java8-jdk apt-utils wpasupplicant wireless-tools firmware-atheros firmware-brcm80211 firmware-libertas firmware-ralink firmware-realtek libpng12-dev
 ltsp-chroot --arch armhf update-rc.d nfs-common disable
 ltsp-chroot --arch armhf update-rc.d rpcbind disable
-ltsp-chroot --arch armhf apt-get install -y linux-image-3.12-1-rpi linux-image-3.10-3-rpi linux-image-3.2.0-4-rpi
+ltsp-chroot --arch armhf apt-get install -y linux-image-3.18.0-trunk-rpi linux-image-3.18.0-trunk-rpi2 linux-image-3.12-1-rpi linux-image-3.10-3-rpi linux-image-3.2.0-4-rpi linux-image-rpi-rpfv linux-image-rpi2-rpfv
 
 ltsp-chroot --arch armhf apt-get install -y libqt4-network #Remove this when Sonic-Pi 2 update fixing the dependency issue is released.
 
@@ -1059,7 +1075,7 @@ fi
 TroubleShooter(){
 
 	whiptail --title "Troubleshooter" --msgbox "Welcome to Raspi-LTSP troubleshooter. The troubleshooter goes over a few possible issues you may be having with your setup and offers advice.
-	WARNING - This troubleshooter is experimental, feel free to open issue reports at https://github.com/gbaman/RaspberryPi-LTSP/issues if you have any additional issues." 16 78
+	WARNING - This troubleshooter is experimental, feel free to open issue reports at $Repository/issues if you have any additional issues." 16 78
 	whiptail --title "Boot" --yesno "Have you got as far as your Raspberry Pi starting up?" 8 78
 	if [ $? -eq 0 ]; then
 		whiptail --title "Login screen" --yesno "Have you got as far as the login screen displaying?" 8 78
@@ -1069,7 +1085,7 @@ TroubleShooter(){
 				whiptail --title "Login" --msgbox "LDM (login screen) does not handle incorrect passwords very well. If you enter an incorrect set of credentials, it just restarts itself. Don't worry about this.
 				If you are unsure about your password, remember you can easily change it in the Manage-users submenu" 16 78
 			else
-				whiptail --title "???" --msgbox "I am not aware of any other issues in this area. Please create a support ticket at https://github.com/gbaman/RaspberryPi-LTSP/issues" 8 78
+				whiptail --title "???" --msgbox "I am not aware of any other issues in this area. Please create a support ticket at $Repository/issues" 8 78
 			fi
 		else
 			resetAndCleanup
@@ -1088,7 +1104,7 @@ TroubleShooter(){
 					if [ $? -eq 0 ]; then
 						whiptail --title "Giving up" --msgbox "This usually means the Raspberry Pi isn't physically connected to the network, check the ethernet cable is correctly plugged in (wifi is not supported) and is connected to your main switch." 16 78
 					else
-						whiptail --title "???" --msgbox "I am not aware of any other issues in this area. Please create a support ticket at https://github.com/gbaman/RaspberryPi-LTSP/issues" 8 78		
+						whiptail --title "???" --msgbox "I am not aware of any other issues in this area. Please create a support ticket at $Repository/issues" 8 78		
 					fi
 				fi
 			fi
@@ -1101,10 +1117,10 @@ TroubleShooter(){
 				whiptail --title "Formating partitions" --msgbox "When flashing Raspbian or another Raspberry Pi operating system onto SD cards, a number of partitions are created. Raspi-LTSP only needs a single partition, the boot partition.
 				This is usually a small (~50mb) partition which is formatted as fat32. If you wish to format the entire SD card (which if you are having issues, you may want to), please refer to the userguide section on formatting SD cards. " 16 78	
 			else
-				whiptail --title "???" --msgbox "I am not aware of any other issues in this area. Please create a support ticket at https://github.com/gbaman/RaspberryPi-LTSP/issues" 8 78	
+				whiptail --title "???" --msgbox "I am not aware of any other issues in this area. Please create a support ticket at $Repository/issues" 8 78	
 			fi
 		else
-			whiptail --title "???" --msgbox "I am not aware of any other issues in this area. Please create a support ticket at https://github.com/gbaman/RaspberryPi-LTSP/issues" 8 78
+			whiptail --title "???" --msgbox "I am not aware of any other issues in this area. Please create a support ticket at $Repository/issues" 8 78
 		fi
 	fi
 }
@@ -1146,7 +1162,7 @@ SetupSambaPi(){
 
 
 
-Updater(){
+Updater2(){
 	echo "---------------------------------"
 	echo "Updating Raspi-LTSP, please wait."
 	echo "---------------------------------"
@@ -1173,10 +1189,42 @@ $newVersion" 8 78
 	fi
 }
 
+AfterUpdate(){
+whiptail --title "Update complete" --msgbox "The update succeeded. Raspi-LTSP is now up to date." 8 78
+#if [ $exitstatus = "0" ]; then
+
+		whiptail --title "Update-all" --yesno "After a software update it is recommended you do a system update. This will update all packages to their most recent version and add any new ones added in the update, do you want to?" 9 78
+		exitstatus=$?
+		if [ $exitstatus = 0 ]; then
+			exec /bin/bash Pi_ltsp Update-All
+			exit
+		else
+			exec /bin/bash Pi_ltsp
+			exit
+		fi
+	#fi
+}
+
+
+Updater(){
+	#echo "Ok, going to do that update now for you"
+	$p updatePiLTSP
+	exitstatus=$(gp)
+	if [ $exitstatus = 0 ]; then 
+		AfterUpdate
+	else
+		whiptail --title "Update failed" --msgbox "The auto update failed. This usually means you aren't connected to the internet" 8 78
+		exec /bin/bash Pi_ltsp
+	fi
+	
+
+}
+
+
 
 UpdaterOld(){
 	rm -rf /tmp/Pi_ltsp > /dev/null 2>&1
-	#wget https://raw.github.com/gbaman/RaspberryPi-LTSP/master/Pi_ltsp -O /tmp/Pi_ltsp
+	#wget $RawRepository/$ReleaseBranch/Pi_ltsp -O /tmp/Pi_ltsp
 	wget --content-disposition http://pi-ltsp.net/downloadalpha -O /tmp/Pi_ltsp
 	exitstatus=$($p updatePiLTSP)
 	if [ $? -eq 0 ]; then 
@@ -1201,7 +1249,7 @@ $checkRelease" 8 78
 	fi
 }
 
-CheckReleases(){
+CheckReleases3(){
 	echo "Checking for updates"
 	newVersion=$($p CheckUpdate)
 	#echo "$version"
@@ -1219,6 +1267,17 @@ CheckReleases(){
 }
 
 
+CheckReleases(){
+	#echo "Checking update"
+	$p CheckUpdate $version
+	exitstatus=$(gp)
+	#echo $exitstatus
+	if [ $exitstatus = 1 ]; then
+		AfterUpdate
+	fi
+	
+}
+
 
 
 CheckReleasesOld(){
@@ -1228,7 +1287,7 @@ xml2 -v > /dev/null 2>&1
 if [ $? -eq 2 ]; then 
 	#echo downloading
 	rm -f /tmp/master.atom > /dev/null 2>&1
-	wget https://github.com/gbaman/RaspberryPi-LTSP/commits/master.atom -O /tmp/master.atom > /dev/null 2>&1
+	wget $Repository/commits/$ReleaseBranch.atom -O /tmp/master.atom > /dev/null 2>&1
 	if [ $? -eq 0 ]; then
 		checkRelease=$(xml2 < /tmp/master.atom  | grep /feed/entry/title= | sed 's/.*=//' | sed 's/^ *//; s/ *$//; /^$/d' | head -n 1)
 		checkVersion=$(cut -d " " -f 2 <<< "$checkRelease")
@@ -1634,7 +1693,7 @@ if [ $(checkInternet) -eq 0 ]; then
 	AddDesktopShortcutToUser $SUDO_USER
 
 	if [ ! -f "/usr/share/pixmaps/Pi-ltsp-icon.png" ]; then
-		wget https://raw.github.com/gbaman/RaspberryPi-LTSP/master/images/Pi-ltsp-icon.png
+		wget $RawRepository/$ReleaseBranch/images/Pi-ltsp-icon.png
 		mv Pi-ltsp-icon.png /usr/share/pixmaps/Pi-ltsp-icon.png
 	fi
 
@@ -1681,8 +1740,8 @@ sudo service nbd-server restart
 }
 
 AddPasswordReset(){
-	wget https://raw.github.com/gbaman/RaspberryPi-LTSP/master/Scripts/changePassword.sh -O /tmp/changePassword.sh
-	wget https://raw.github.com/gbaman/RaspberryPi-LTSP/master/images/Pi-ltsp-change-password.png -O /tmp/Pi-ltsp-change-password.png
+	wget $RawRepository/$ReleaseBranch/Scripts/changePassword.sh -O /tmp/changePassword.sh
+	wget $RawRepository/$ReleaseBranch/images/Pi-ltsp-change-password.png -O /tmp/Pi-ltsp-change-password.png
 	cp /tmp/Pi-ltsp-change-password.png /opt/ltsp/armhf/usr/share/pixmaps/Pi-ltsp-change-password.png
 	cp /tmp/changePassword.sh /usr/local/bin/changePassword.sh
 	cut -d: -f1,3 /etc/passwd | egrep ':[0-9]{4}$' | cut -d: -f1 | while IFS= read -r user
@@ -1728,8 +1787,8 @@ fi
 }
 
 AddScreenshot(){
-	wget https://raw.github.com/gbaman/RaspberryPi-LTSP/master/Scripts/Raspi-ltsp-screenshot.sh -O /tmp/Raspi-ltsp-screenshot.sh
-	wget https://raw.github.com/gbaman/RaspberryPi-LTSP/master/images/Pi-ltsp-screenshot.png -O /tmp/Pi-ltsp-screenshot.png
+	wget $RawRepository/$ReleaseBranch/Scripts/Raspi-ltsp-screenshot.sh -O /tmp/Raspi-ltsp-screenshot.sh
+	wget $RawRepository/$ReleaseBranch/images/Pi-ltsp-screenshot.png -O /tmp/Pi-ltsp-screenshot.png
 	cp /tmp/Pi-ltsp-screenshot.png /opt/ltsp/armhf/usr/share/pixmaps/Pi-ltsp-screenshot.png
 	cp /tmp/Raspi-ltsp-screenshot.sh /opt/ltsp/armhf/usr/local/bin/Raspi-ltsp-screenshot.sh
 	chmod +x /opt/ltsp/armhf/usr/local/bin/Raspi-ltsp-screenshot.sh
@@ -1840,7 +1899,7 @@ fi
 }
 
 InstallScratchGPIO(){
-	whiptail --title "Note" --msgbox "ScratchGPIO can't be directly installed, each user must install it. A desktop shortcut has been added to each user account called \"Install ScratchGPIO\". Get each student to run this the first time they want to use the software." 10 78
+	whiptail --title "Note" --msgbox "ScratchGPIO can't be directly installed, each user must install it. A desktop shortcut has been added to each user account called \"Install ScratchGPIO\". Get each student to run this the first time they want to use the software. Also, this version of ScratchGPIO has a few issues with the B+ and the Raspberry Pi 2 model B." 11 78
 	rm -rf /tmp/isgh5.sh
 	rm -rf /opt/ltsp/armhf/usr/local/bin/isgh5.sh
 	rm -rf /opt/ltsp/armhf/usr/local/bin/scratchSudo.sh
@@ -1911,7 +1970,7 @@ InstallBlueJ(){
 
 checkPythonFunctionsInstalled(){
 	if [ ! -f $PythonFunctions ]; then
-		wget https://raw.githubusercontent.com/gbaman/RaspberryPi-LTSP/master/Scripts/Pi_ltsp-functions-python.py -O $PythonFunctions
+		wget $RawRepository/$ReleaseBranch/Scripts/Pi_ltsp-functions-python.py -O $PythonFunctions
 		if [ ! $? -eq 0 ]; then 
 			whiptail --title "Error!" --msgbox "I am sorry, there has been a critical error with Raspi-LTSP. A required library file could not be acquired. Raspi-LTSP is unable to function without this library. This may be because you are not connected to the internet or there may be another problem.
 Please manually download the file from http://bit.ly/14aU4u1 and copy it to $PythonFunctions
@@ -1924,7 +1983,8 @@ If the issue persists, please contact support at http://pi-ltsp.net/support.html
 }
 
 checkKernelFileUpdateWeb(){
-	KernelV=$($p checkKernelFileUpdateWeb)
+	$p checkKernelFileUpdateWeb
+	KernelV=$(gp)
 	if [ $KernelV = "1" ]; then
 		current=$(head -n 1 /home/$SUDO_USER/piBoot/version.txt)
 		newVersion=$(head -n 1 /tmp/kernelVersion.txt)
@@ -1950,7 +2010,8 @@ checkKernelUpdater(){
 
 installKernelUpdater(){
 	local compress=$1
-	exitstatus=$($p checkKernelUpdater)
+	$p checkKernelUpdater
+	exitstatus=$(gp)
 	if [ "$exitstatus" = "1" ]; then
 		if [ "$compress" = "NBD" ]; then
 			echo "----------------------------------------------------------------------------------------------"
@@ -1966,7 +2027,9 @@ InstallRaspberryPiUIMods(){
 		ltsp-chroot apt-get install -y raspberrypi-ui-mods 
 		$p replaceLineOrAdd /opt/ltsp/armhf/etc/xdg/pcmanfm/LXDE-pi/pcmanfm.conf wallpaper_mode=3 wallpaper_mode=stretch
 		$p replaceLineOrAdd /opt/ltsp/armhf/etc/xdg/pcmanfm/LXDE-pi/pcmanfm.conf wallpaper=/usr/share/raspberrypi-artwork/raspberry-pi-logo-small.png wallpaper=/etc/alternatives/desktop-background
+		$p replaceLineOrAdd /opt/ltsp/armhf/etc/xdg/pcmanfm/LXDE-pi/pcmanfm.conf side_pane_mode=2 side_pane_mode=1
 }
+
 
 #***************************************************************************************************
 
@@ -2671,7 +2734,9 @@ CheckTerminalSize
 teacherSudoCheck
 LegacyConfig
 ConfigFileRead
-if [ $(checkInternet) -eq 0 ]; then
+
+intStat=$(checkInternet)
+if [ $intStat -eq 0 ]; then
 	CheckReleases
 	checkKernelFileUpdateWeb
 	checkKernelUpdater "NBD"
@@ -2679,4 +2744,3 @@ fi
 LegacyFixes
 #VariablesSetup
 Menu
-
