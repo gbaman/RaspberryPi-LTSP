@@ -3,7 +3,7 @@
 #
 # See LICENSE file for copyright and license details
 
-version=0.10.42
+version=0.10.43
 
 #Raspi-LTSP
 #Pi_LTSP
@@ -681,7 +681,7 @@ if [ ! -f /opt/ltsp/armhf/usr/local/bin/raspi2png ]; then
 fi
 
 #Server software
-apt-get install -y bindfs
+apt-get install -y bindfs python3-feedparser
 
 #******************************************************************************************
 #------------------------------------------------------------------------------------------
