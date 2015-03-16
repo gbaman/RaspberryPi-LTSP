@@ -370,6 +370,7 @@ def checkUpdate(currentVersion):
         returnData(0)
     import feedparser
     import xml.etree.ElementTree
+    downloadFile("http://bit.ly/piltspcheckmaster", "/dev/null")
     d = feedparser.parse('https://github.com/gbaman/RaspberryPi-LTSP/commits/master.atom')
     releases = []
     data = (d.entries[0].content[0].get('value'))
