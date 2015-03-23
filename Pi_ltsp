@@ -3,7 +3,7 @@
 #
 # See LICENSE file for copyright and license details
 
-version=0.10.44
+version=0.10.45
 
 #Raspi-LTSP
 #Pi_LTSP
@@ -1836,7 +1836,7 @@ fi
 
 CreateMoveBackup() {
 #Create a full backup of all users and groups data for moving to a clean system
-whiptail --title "WARNING!!" --yesno "This process is extremely experimental! I take no responsibility for data loss! It is only designed to move the files to a completely fresh Ubuntu install in which Raspi-LTSP is not installed! Please visit http://pi-ltsp.net/manage-users/migration.html for full instructions.
+whiptail --title "Warning" --yesno "This process is only designed to move user files to a completely fresh Ubuntu install in which PiNet is not installed. Please make sure to verify all user data is imported correctly on the new PiNet server. Visit http://PiNet.org.uk/manage-users/migration.html for full instructions.
 Are you sure you want to proceed?" 11 78
 if [ $? -eq 0 ]; then 
 	mkdir /root/move/
@@ -1856,7 +1856,7 @@ fi
 CheckRestoreMoveBackup(){
 if [ -f /home/$SUDO_USER/toMove.tar.gz ]; then
 	if [ -d /opt/ltsp ]; then
-		whiptail --title "WARNING!!" --yesno "I have detected that it looks like Raspi-LTSP is already installed. It is highly recommended against importing users with a previous Raspi-LTSP install. You have been warned! Would you like to import them anyway?" 10 78
+		whiptail --title "WARNING!!" --yesno "I have detected that it looks like PiNet is already installed. It is highly recommended against importing users with a previous PiNet install. You have been warned! Would you like to import them anyway?" 10 78
 		if [ $? -eq 0 ]; then 
 			RestoreMoveBackup
 		fi	
@@ -1872,7 +1872,7 @@ fi
 
 RestoreMoveBackup() {
 #Restore full backup of all users and group data
-whiptail --title "WARNING!!" --yesno "Importing should only be performed on a completely fresh Ubuntu install! Raspi-LTSP must not already be installed! Also this could break everything so I take no responsibility if this alpha quality feature fails. Do you want to proceed?" 10 78
+whiptail --title "Warning" --yesno "Importing should only be performed on a completely fresh Ubuntu install. PiNet or Raspi-LTSP must not already be installed. Make sure to manually check all files have copied correctly. Do you want to proceed?" 10 78
 if [ $? -eq 0 ]; then 
 	mkdir /root/newsusers.bak
 	cp /etc/passwd /etc/shadow /etc/group /etc/gshadow /root/newsusers.bak
@@ -2030,6 +2030,18 @@ InstallRaspberryPiUIMods(){
 		$p replaceLineOrAdd /opt/ltsp/armhf/etc/xdg/pcmanfm/LXDE-pi/pcmanfm.conf side_pane_mode=2 side_pane_mode=1
 }
 
+
+PiNetInfo(){
+	whiptail --title "PiNet released!" --msgbox "As you may have heard by now, PiNet has been released. PiNet is the replacement for RaspberryPi-LTSP and has been in development aloneside it for the past few months. It shares a majority of the same code, but has been renamed to reduce confusion (RaspebrryPi-LTSP is pretty hard to remember) and has a number of new features.
+	
+	Alongside the release, we have also released the new documentation website, which can be found at http://pinet.org.uk.
+	
+	An important thing to be aware of is there is no automatic upgrade route from Raspi-LTSP to PiNet. You can though easily export your users data, copy it to a removeable drive and reinstall your server. When PiNet launches for the first time it was ask if you want to import users.
+	More information on the migration process can be found at http://pinet.org.uk/articles/manage-users/migration.html
+	
+	Updates for RaspberryPi-LTSP will stop (with the exception of important security fixes) and it is highly recommended you move to PiNet ASAP." 24 78
+	
+}
 
 #***************************************************************************************************
 
