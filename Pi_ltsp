@@ -3,7 +3,7 @@
 #
 # See LICENSE file for copyright and license details
 
-version=0.10.45
+version=0.10.46
 
 #Raspi-LTSP
 #Pi_LTSP
@@ -2034,12 +2034,12 @@ InstallRaspberryPiUIMods(){
 PiNetInfo(){
 	whiptail --title "PiNet released!" --msgbox "As you may have heard by now, PiNet has been released. PiNet is the replacement for RaspberryPi-LTSP and has been in development aloneside it for the past few months. It shares a majority of the same code, but has been renamed to reduce confusion (RaspebrryPi-LTSP is pretty hard to remember) and has a number of new features.
 	
-	Alongside the release, we have also released the new documentation website, which can be found at http://pinet.org.uk.
+Alongside the release, we have also released the new documentation website, which can be found at http://pinet.org.uk.
 	
-	An important thing to be aware of is there is no automatic upgrade route from Raspi-LTSP to PiNet. You can though easily export your users data, copy it to a removeable drive and reinstall your server. When PiNet launches for the first time it was ask if you want to import users.
-	More information on the migration process can be found at http://pinet.org.uk/articles/manage-users/migration.html
+An important thing to be aware of is there is no automatic upgrade route from Raspi-LTSP to PiNet. You can though easily export your users data, copy it to a removeable drive and reinstall your server. When PiNet launches for the first time it was ask if you want to import users.
+More information on the migration process can be found at http://pinet.org.uk/articles/manage-users/migration.html
 	
-	Updates for RaspberryPi-LTSP will stop (with the exception of important security fixes) and it is highly recommended you move to PiNet ASAP." 24 78
+Updates for RaspberryPi-LTSP will stop (with exception of important security fixes) and it is highly recommended you move to PiNet ASAP." 24 78
 	
 }
 
@@ -2755,4 +2755,5 @@ if [ $intStat -eq 0 ]; then
 fi
 LegacyFixes
 #VariablesSetup
+PiNetInfo
 Menu

@@ -383,7 +383,7 @@ def checkUpdate(currentVersion):
         whiptailBox("msgbox", "Update detected", "An update has been detected for Raspberry Pi LTSP. Select OK to view the Release History.", False)
         displayChangeLog(currentVersion)
     else:
-        print("No PiNet software updates found")
+        print("No Raspi-LTSP software updates found")
         #print(thisVersion)
         #print(currentVersion)
         returnData(0)
@@ -505,5 +505,3 @@ else:
         checkKernelUpdater()
     elif sys.argv[1] == "installCheckKernelUpdater":
         installCheckKernelUpdater()
-
-
